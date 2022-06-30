@@ -5,6 +5,7 @@ import pandas as pd
 import requests
 
 
+main_array = []
 
 
 url_of_all_new_personal_home_in_tehran='https://divar.ir/s/tehran/real-estate?user_type=personal'
@@ -75,18 +76,102 @@ for card in cards:
     except:
         area = ''
 
- 
+    try:
+        floor = detail_page.select(
+            '.kt-unexpandable-row:nth-child(13)')[0].getText()
+        
+        if not 'طبقه' in floor:
+            floor = ''
+
+    except:
+        floor = ''
+
+    try:
+        anbari = detail_page.select('.kt-icon-cabinet+ .kt-body--stable')[0].getText()
+        if not 'انبار' in anbari:
+            anbari = ''
+    except:
+        anbari = ''
+
+    try:
+        parking = detail_page.select(
+            '.kt-icon-parking+ .kt-body--stable')[0].getText()
+        if not 'پارکینگ' in parking:
+            parking = ''
+    except:
+        parking = ''
+
+    try:
+        elevator = detail_page.select('.kt-icon-elevator+ .kt-body--stable')[0].getText()
+        if not 'آسانسور' in elevator:
+            elevator = ''
+    except:
+        elevator = ''
+    
+    try:
+        price_per_meter = detail_page.select(
+            '.kt-unexpandable-row:nth-child(5)')[0].getText()
+        if not 'قیمت هر متر' in price_per_meter:
+            price_per_meter = ''
+    
+    except:
+        price_per_meter = ''
+
+    try:
+        total_price = detail_page.select('.kt-unexpandable-row:nth-child(3)')[0].getText()
+        if not 'قیمت کل' in total_price:
+            total_price = ''
+    except:
+        total_price = ''
+
+    if 'اجاره' in price or 'ودیعه' in price:
+        type_of_sell = 'rent'
+    else:
+        type_of_sell = 'sell'
+
+    try:
+        main_type = detail_page.select(
+            '.kt-breadcrumbs__item:nth-child(2) .kt-breadcrumbs__link')[0].getText()
+    except:
+        main_type = ''
+
+    try:
+        sub_type = detail_page.select(
+            '.kt-breadcrumbs__item~ .kt-breadcrumbs__item+ .kt-breadcrumbs__item a')[0].getText()
+    except:
+        sub_type = ''
 
 
 
+    array_of_data.append(title)
+    array_of_data.append(price)
+    array_of_data.append(address)
+    array_of_data.append(link)
+    array_of_data.append(description)
+    array_of_data.append(year)
+    array_of_data.append(rooms)
+    array_of_data.append(area)
+    array_of_data.append(floor)
+    array_of_data.append(anbari)
+    array_of_data.append(parking)
+    array_of_data.append(elevator)
+    array_of_data.append(price_per_meter)
+    array_of_data.append(total_price)
+    array_of_data.append(type_of_sell)
+    array_of_data.append(main_type)
+    array_of_data.append(sub_type)
+    print('.','one home is done')
+
+    main_array.append(array_of_data)
 
 
+print('creating data frame............')
+# creaete dataframe from the main array
+df = pd.DataFrame(main_array, columns=['title', 'price', 'address', 'link', 'description', 'year', 'rooms', 'area', 'floor', 'anbari', 'parking', 'elevator', 'price_per_meter', 'total_price', 'type_of_sell', 'main_type', 'sub_type'])
 
-
-
-
-
-
+print("creating excel file............")
+# create excel file from the dataframe
+df.to_excel('divar.xlsx')
 
 
 
