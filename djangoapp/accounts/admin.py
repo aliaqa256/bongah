@@ -12,7 +12,7 @@ class UserAdmin(admin.ModelAdmin):
     search_fields = ['full_name', 'username']
     fieldsets = (
         ('General Info', {
-            'fields': ('full_name', 'username', 'password', 'email')
+            'fields': ('full_name', 'username', 'password', 'email', 'phone_number')
         }),
         ('Details', {
             'classes': ('collapse',),

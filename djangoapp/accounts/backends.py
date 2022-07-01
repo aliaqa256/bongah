@@ -3,7 +3,7 @@ from django.db.models import Q
 from .models import User
 
 
-class EmailAndUsernameBackend(ModelBackend):
+class Phone_numberAndUsernameBackend(ModelBackend):
 
     def authenticate(self, request, username=None, password=None, **kwargs):
 
@@ -13,7 +13,7 @@ class EmailAndUsernameBackend(ModelBackend):
             username = kwargs.get(UserModel.USERNAME_FIELD)
         try:
             user = UserModel.objects.get(
-                Q(email=username) | Q(username=username))
+                Q(phone_number=username) | Q(username=username))
         except UserModel.DoesNotExist:
             UserModel().set_password(password)
         else:

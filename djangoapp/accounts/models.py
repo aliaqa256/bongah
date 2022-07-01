@@ -5,26 +5,28 @@ from .validators import PhoneValidator
 
 
 class UserManager(BaseUserManager):
-    def create_user(self, username, email, password=None, **kwargs):
+    def create_user(self, username, phone_number, password=None, **kwargs):
         if not username:
             raise ValueError("Users must have username")
         if not password:
             raise ValueError("Users must have password")
-        if not email:
-            raise ValueError("Users must have email")
-        user = self.model(username=username, email=email, **kwargs)
+        if not phone_number:
+            raise ValueError("Users must have phone_number")
+        user = self.model(username=username,
+                          phone_number=phone_number, **kwargs)
         user.set_password(password)
         user.save()
         return user
 
-    def create_staffuser(self, username, email, password, **kwargs):
-        user = self.model(username=username, email=email, staff=True, **kwargs)
+    def create_staffuser(self, username, phone_number, password, **kwargs):
+        user = self.model(username=username,
+                          phone_number=phone_number, staff=True, **kwargs)
         user.set_password(password)
         user.save()
         return user
 
-    def create_superuser(self, username, email, password, **kwargs):
-        user = self.model(username=username, email=email,
+    def create_superuser(self, username, phone_number, password, **kwargs):
+        user = self.model(username=username, phone_number=phone_number,
                           staff=True, superuser=True, active=True, **kwargs)
         user.set_password(password)
         user.save()
@@ -38,7 +40,7 @@ class User(AbstractBaseUser):
     username = models.CharField(verbose_name='username', max_length=200,
                                 db_index=True, null=False, blank=False, unique=True)
     email = models.EmailField(verbose_name='email',
-                              blank=True, null=True, unique=True)
+                              blank=True, null=True, unique=True,default=None)
     superuser = models.BooleanField(verbose_name='is superuser', default=False)
     staff = models.BooleanField(verbose_name='is staff', default=False)
     active = models.BooleanField(verbose_name='active', default=True)
@@ -52,7 +54,7 @@ class User(AbstractBaseUser):
         verbose_name='phone number', max_length=15, validators=[PhoneValidator], blank=True, null=True)
 
     USERNAME_FIELD = 'username'
-    REQUIRED_FIELDS = ['email']
+    REQUIRED_FIELDS = ['phone_number']
 
     objects = UserManager()
 
@@ -81,3 +83,7 @@ class User(AbstractBaseUser):
         ordering = ('id', 'created_date',)
         verbose_name = 'User'
         verbose_name_plural = 'Users'
+
+
+
+

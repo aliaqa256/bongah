@@ -6,8 +6,6 @@ import requests
 
 cookies = {
     'token': 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyIjoiMDkzMzg3ODc1MTAiLCJpc3MiOiJhdXRoIiwiaWF0IjoxNjU2NTg5Nzg3LCJleHAiOjE2NTc4ODU3ODcsInZlcmlmaWVkX3RpbWUiOjE2NTY1ODk3ODcsInVzZXItdHlwZSI6InBlcnNvbmFsIiwidXNlci10eXBlLWZhIjoiXHUwNjdlXHUwNjQ2XHUwNjQ0IFx1MDYzNFx1MDYyZVx1MDYzNVx1MDZjYyIsInNpZCI6ImY5ZjRlNzM5LTI0ODEtNDc1OS05MDMwLTc0ZThiZmE4MWE0MyJ9.Bhicmnly7tESNKKUxeyMfjsSyWCdEl7SyZJfUxSSA7E',
-    # 'cookiesession1': '678ADA5AOQRSTV135688024BDFHJ9BD1',
-
 }
 
 
@@ -170,7 +168,7 @@ for card in cards:
     array_of_data.append(main_type)
     array_of_data.append(sub_type)
     array_of_data.append(contact)
-    
+
     print('.', 'one home is done')
 
     main_array.append(array_of_data)
