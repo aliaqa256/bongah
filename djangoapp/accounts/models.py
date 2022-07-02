@@ -53,6 +53,15 @@ class User(AbstractBaseUser):
     phone_number = models.CharField(
         verbose_name='phone number', max_length=15, validators=[PhoneValidator], blank=True, null=True)
 
+
+    # home property
+    address = models.CharField(
+        verbose_name='address', max_length=100, blank=True, null=True)
+    
+    keywords = models.CharField(
+        verbose_name='keywords', max_length=100, blank=True, null=True)
+
+
     USERNAME_FIELD = 'username'
     REQUIRED_FIELDS = ['phone_number']
 
@@ -87,3 +96,54 @@ class User(AbstractBaseUser):
 
 
 
+class Home(models.Model):
+    title = models.CharField(verbose_name='title', max_length=250, blank=False, null=False)
+    price = models.CharField(verbose_name='price',
+                             max_length=250, blank=True, null=True)
+    address = models.CharField(verbose_name='address', max_length=250, blank=True, null=True)
+    link = models.CharField(verbose_name='link', max_length=250, blank=True, null=True)
+    description = models.TextField(verbose_name='description', blank=True, null=True)
+    year = models.CharField(verbose_name='year', max_length=250, blank=True, null=True)
+    rooms = models.CharField(verbose_name='rooms', max_length=250, blank=True, null=True)
+    area = models.CharField(verbose_name='area', max_length=250, blank=True, null=True)
+    floor = models.CharField(verbose_name='floor', max_length=250, blank=True, null=True)
+    anbari = models.CharField(verbose_name='anbari', max_length=250, blank=True, null=True)
+    parking = models.CharField(verbose_name='parking', max_length=250, blank=True, null=True)
+    elevator = models.CharField(verbose_name='elevator', max_length=250, blank=True, null=True)
+    price_per_meter = models.CharField(verbose_name='price_per_meter', max_length=250, blank=True, null=True)
+    total_price = models.CharField(verbose_name='total_price', max_length=250, blank=True, null=True)
+    type_of_sell = models.CharField(verbose_name='type_of_sell', max_length=250, blank=True, null=True)
+    main_type = models.CharField(verbose_name='main_type', max_length=250, blank=True, null=True)
+    sub_type = models.CharField(verbose_name='sub_type', max_length=250, blank=True, null=True)
+    contact = models.CharField(verbose_name='contact', max_length=250, blank=True, null=True)
+    created_date = models.DateTimeField(
+        verbose_name='created date', auto_now_add=True)
+    update_date = models.DateTimeField(
+        verbose_name='update date', auto_now=True)
+
+    def __str__(self):
+        return "{}".format(self.title)
+    
+    class Meta:
+        ordering = ('id', 'created_date',)
+        verbose_name = 'Home'
+        verbose_name_plural = 'Homes'
+
+
+class AppTokens(models.Model):
+    title=models.CharField(verbose_name='title', max_length=250, blank=False, null=False)
+    token=models.CharField(verbose_name='token', max_length=250, blank=False, null=False)
+    created_date = models.DateTimeField(
+        verbose_name='created date', auto_now_add=True)
+    update_date = models.DateTimeField(
+        verbose_name='update date', auto_now=True)
+    
+
+    def __str__(self):
+        return "{}".format(self.title)
+    
+    class Meta:
+        ordering = ('id', 'created_date',)
+        verbose_name = 'AppToken'
+        verbose_name_plural = 'AppTokens'
+    

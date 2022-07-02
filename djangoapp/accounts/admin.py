@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import  User
+from .models import User, Home, AppTokens
 
 
 @admin.register(User)
@@ -16,7 +16,7 @@ class UserAdmin(admin.ModelAdmin):
         }),
         ('Details', {
             'classes': ('collapse',),
-            'fields': ( 'active' ,)
+            'fields': ('active', 'address',  'keywords')
         }),
         ('AdminDetail', {
             'classes': ('collapse',),
@@ -32,3 +32,14 @@ class UserAdmin(admin.ModelAdmin):
         active = queryset.update(active=False)
 
 
+@admin.register(Home)
+class HomeAdmin(admin.ModelAdmin):
+    list_display = ['title', 'address', 'created_date', 'update_date']
+    list_display_links = ['title']
+
+
+# register AppTokens
+@admin.register(AppTokens)
+class AppTokensAdmin(admin.ModelAdmin):
+    list_display = ['title', 'token']
+ 
