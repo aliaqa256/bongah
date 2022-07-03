@@ -31,3 +31,15 @@ class LoginAPIView(TokenObtainPairView):
     permission_classes = [permissions.AllowAny]
     queryset = User.objects.all()
 
+class AddUserNewKeyWord(APIView):
+    permission_classes = [permissions.AllowAny]
+
+    def post(self, request, *args, **kwargs):
+        if request.user:
+            user = request.user
+        if 'phone' in request.data:
+            user=User.objects.get(phone=request.data['phone'])
+
+        user.key_words.add(request.data['key_word'])
+        user.save()
+        return Response(status=status.HTTP_200_OK)

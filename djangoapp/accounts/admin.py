@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import User, Home, AppTokens
+from .models import SearchWords, User, Home, AppTokens
 
 
 @admin.register(User)
@@ -16,7 +16,7 @@ class UserAdmin(admin.ModelAdmin):
         }),
         ('Details', {
             'classes': ('collapse',),
-            'fields': ('active', 'address',  'keywords')
+            'fields': ('active',)
         }),
         ('AdminDetail', {
             'classes': ('collapse',),
@@ -43,3 +43,8 @@ class HomeAdmin(admin.ModelAdmin):
 class AppTokensAdmin(admin.ModelAdmin):
     list_display = ['title', 'token']
  
+
+@admin.register(SearchWords)
+class SearchWordsAdmin(admin.ModelAdmin):
+    list_display = ['word']
+  

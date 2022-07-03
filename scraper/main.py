@@ -10,7 +10,7 @@ HEADERS = ({'User-Agent':
             'Accept-Language': 'en-US, en;q=0.5'})
 
 cookies = {
-    # 'token': 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyIjoiMDkzMzg3ODc1MTAiLCJpc3MiOiJhdXRoIiwiaWF0IjoxNjU2NzUxNTUzLCJleHAiOjE2NTgwNDc1NTMsInZlcmlmaWVkX3RpbWUiOjE2NTY3NTE1NTMsInVzZXItdHlwZSI6InBlcnNvbmFsIiwidXNlci10eXBlLWZhIjoiXHUwNjdlXHUwNjQ2XHUwNjQ0IFx1MDYzNFx1MDYyZVx1MDYzNVx1MDZjYyIsInNpZCI6ImYyYzc0ODJmLTljNzUtNGY1Mi1iODRiLTRlOTE0NzAyNmM1OSJ9.f39EMcoDdKeqyq3q5H408zrQilZCBpHA_bmrf2QwXBg',
+    'token': 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyIjoiMDkzMzg3ODc1MTAiLCJpc3MiOiJhdXRoIiwiaWF0IjoxNjU2NzUxNTUzLCJleHAiOjE2NTgwNDc1NTMsInZlcmlmaWVkX3RpbWUiOjE2NTY3NTE1NTMsInVzZXItdHlwZSI6InBlcnNvbmFsIiwidXNlci10eXBlLWZhIjoiXHUwNjdlXHUwNjQ2XHUwNjQ0IFx1MDYzNFx1MDYyZVx1MDYzNVx1MDZjYyIsInNpZCI6ImYyYzc0ODJmLTljNzUtNGY1Mi1iODRiLTRlOTE0NzAyNmM1OSJ9.f39EMcoDdKeqyq3q5H408zrQilZCBpHA_bmrf2QwXBg',
 }
 
 url_of_all_new_personal_home_in_tehran = 'https://divar.ir/s/tehran/real-estate?user_type=personal'

@@ -4,6 +4,7 @@ from .validators import PhoneValidator
 
 
 
+
 class UserManager(BaseUserManager):
     def create_user(self, username, phone_number, password=None, **kwargs):
         if not username:
@@ -54,12 +55,7 @@ class User(AbstractBaseUser):
         verbose_name='phone number', max_length=15, validators=[PhoneValidator], blank=True, null=True)
 
 
-    # home property
-    address = models.CharField(
-        verbose_name='address', max_length=100, blank=True, null=True)
-    
-    keywords = models.CharField(
-        verbose_name='keywords', max_length=100, blank=True, null=True)
+
 
 
     USERNAME_FIELD = 'username'
@@ -92,6 +88,9 @@ class User(AbstractBaseUser):
         ordering = ('id', 'created_date',)
         verbose_name = 'User'
         verbose_name_plural = 'Users'
+
+
+
 
 
 
@@ -132,7 +131,7 @@ class Home(models.Model):
 
 class AppTokens(models.Model):
     title=models.CharField(verbose_name='title', max_length=250, blank=False, null=False)
-    token=models.CharField(verbose_name='token', max_length=250, blank=False, null=False)
+    token=models.CharField(verbose_name='token', max_length=1000, blank=False, null=False)
     created_date = models.DateTimeField(
         verbose_name='created date', auto_now_add=True)
     update_date = models.DateTimeField(
@@ -147,3 +146,11 @@ class AppTokens(models.Model):
         verbose_name = 'AppToken'
         verbose_name_plural = 'AppTokens'
     
+
+class SearchWords(models.Model):
+    word = models.CharField(max_length=100)
+    user = models.ForeignKey('User', on_delete=models.CASCADE,
+                             null=True, blank=True, related_name='search_words')
+
+    def __str__(self):
+        return self.word

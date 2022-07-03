@@ -3,9 +3,10 @@ from bs4 import BeautifulSoup
 import pandas as pd
 import requests
 from .models import AppTokens
+from .models import Home
 
 cookies = {
-    # 'token': 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyIjoiMDkzMzg3ODc1MTAiLCJpc3MiOiJhdXRoIiwiaWF0IjoxNjU2NzUxNTUzLCJleHAiOjE2NTgwNDc1NTMsInZlcmlmaWVkX3RpbWUiOjE2NTY3NTE1NTMsInVzZXItdHlwZSI6InBlcnNvbmFsIiwidXNlci10eXBlLWZhIjoiXHUwNjdlXHUwNjQ2XHUwNjQ0IFx1MDYzNFx1MDYyZVx1MDYzNVx1MDZjYyIsInNpZCI6ImYyYzc0ODJmLTljNzUtNGY1Mi1iODRiLTRlOTE0NzAyNmM1OSJ9.f39EMcoDdKeqyq3q5H408zrQilZCBpHA_bmrf2QwXBg',
+    'token': AppTokens.objects.all().first().token
 }
 
 
@@ -28,6 +29,10 @@ def divar_scraper():
         # select the title of the card
         title = card.select('.kt-post-card__title')[0].getText()
         # select the price of the card
+        # if home with this title is in database, skip it
+        if Home.objects.filter(title=title).exists():
+            continue
+
         try:
             price = card.select('.kt-post-card__description')[0].getText()
         except:
@@ -182,5 +187,6 @@ def divar_scraper():
                 'sub_type': sub_type,
                 'contact': contact}
         array_of_homes.append(home)
+        print('home is added')
         
     return array_of_homes
