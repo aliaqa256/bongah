@@ -5,7 +5,7 @@ import requests
 from .models import AppTokens
 
 cookies = {
-    'token': 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyIjoiMDkzMzg3ODc1MTAiLCJpc3MiOiJhdXRoIiwiaWF0IjoxNjU2NzUxNTUzLCJleHAiOjE2NTgwNDc1NTMsInZlcmlmaWVkX3RpbWUiOjE2NTY3NTE1NTMsInVzZXItdHlwZSI6InBlcnNvbmFsIiwidXNlci10eXBlLWZhIjoiXHUwNjdlXHUwNjQ2XHUwNjQ0IFx1MDYzNFx1MDYyZVx1MDYzNVx1MDZjYyIsInNpZCI6ImYyYzc0ODJmLTljNzUtNGY1Mi1iODRiLTRlOTE0NzAyNmM1OSJ9.f39EMcoDdKeqyq3q5H408zrQilZCBpHA_bmrf2QwXBg',
+    # 'token': 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyIjoiMDkzMzg3ODc1MTAiLCJpc3MiOiJhdXRoIiwiaWF0IjoxNjU2NzUxNTUzLCJleHAiOjE2NTgwNDc1NTMsInZlcmlmaWVkX3RpbWUiOjE2NTY3NTE1NTMsInVzZXItdHlwZSI6InBlcnNvbmFsIiwidXNlci10eXBlLWZhIjoiXHUwNjdlXHUwNjQ2XHUwNjQ0IFx1MDYzNFx1MDYyZVx1MDYzNVx1MDZjYyIsInNpZCI6ImYyYzc0ODJmLTljNzUtNGY1Mi1iODRiLTRlOTE0NzAyNmM1OSJ9.f39EMcoDdKeqyq3q5H408zrQilZCBpHA_bmrf2QwXBg',
 }
 
 
@@ -22,7 +22,7 @@ def divar_scraper():
     array_of_homes = []
     response = get_url_with_bs4(url_of_all_new_personal_home_in_tehran)
 
-    cards = response.select('.kt-post-card--outlined')
+    cards = response.select('.kt-col-xxl-4')
 
     for card in cards:
         # select the title of the card
@@ -31,18 +31,30 @@ def divar_scraper():
         try:
             price = card.select('.kt-post-card__description')[0].getText()
         except:
-            price = '0'
+            price = ''
 
         # select the address of the card
-        address = card.select(
-            '.kt-post-card__bottom-description')[0].getText().split(' ')[-1]
+            # select the address of the card
 
-        # select link of the card
-        link = 'https://divar.ir'+card.get('href')
+        try:
+            address = card.select(
+                '.kt-post-card__bottom-description')[0].getText().split(' ')
+            index_of_dar = address.index('در')+1
+            # join the word that index is index_of_dar
+            address = ' '.join(address[index_of_dar:])
+        except:
+            address = ''
 
-        # get the page of link with bs4
-        detail_page = get_url_with_bs4(link)
+        try:
 
+            # select link of the card
+            link = 'https://divar.ir' + card.select('a')[0].get('href')
+
+            # get the page of link with bs4
+            detail_page = get_url_with_bs4(link)
+        except:
+            link = ''
+            print('link is not found')
         try:
             description = detail_page.select(
                 '.kt-description-row .kt-base-row__start')[0].getText()

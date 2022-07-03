@@ -4,24 +4,31 @@ from bs4 import BeautifulSoup
 import pandas as pd
 import requests
 
+HEADERS = ({'User-Agent':
+            'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 \
+            (KHTML, like Gecko) Chrome/44.0.2403.157 Safari/537.36',
+            'Accept-Language': 'en-US, en;q=0.5'})
+
 cookies = {
-    'token': 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyIjoiMDkzMzg3ODc1MTAiLCJpc3MiOiJhdXRoIiwiaWF0IjoxNjU2NzUxNTUzLCJleHAiOjE2NTgwNDc1NTMsInZlcmlmaWVkX3RpbWUiOjE2NTY3NTE1NTMsInVzZXItdHlwZSI6InBlcnNvbmFsIiwidXNlci10eXBlLWZhIjoiXHUwNjdlXHUwNjQ2XHUwNjQ0IFx1MDYzNFx1MDYyZVx1MDYzNVx1MDZjYyIsInNpZCI6ImYyYzc0ODJmLTljNzUtNGY1Mi1iODRiLTRlOTE0NzAyNmM1OSJ9.f39EMcoDdKeqyq3q5H408zrQilZCBpHA_bmrf2QwXBg',
+    # 'token': 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyIjoiMDkzMzg3ODc1MTAiLCJpc3MiOiJhdXRoIiwiaWF0IjoxNjU2NzUxNTUzLCJleHAiOjE2NTgwNDc1NTMsInZlcmlmaWVkX3RpbWUiOjE2NTY3NTE1NTMsInVzZXItdHlwZSI6InBlcnNvbmFsIiwidXNlci10eXBlLWZhIjoiXHUwNjdlXHUwNjQ2XHUwNjQ0IFx1MDYzNFx1MDYyZVx1MDYzNVx1MDZjYyIsInNpZCI6ImYyYzc0ODJmLTljNzUtNGY1Mi1iODRiLTRlOTE0NzAyNmM1OSJ9.f39EMcoDdKeqyq3q5H408zrQilZCBpHA_bmrf2QwXBg',
 }
 
+url_of_all_new_personal_home_in_tehran = 'https://divar.ir/s/tehran/real-estate?user_type=personal'
 
 
-def get_url_with_bs4(url):
-    page = requests.get(url, cookies=cookies)
+def get_url_with_bs4(url,cookies=None):
+    if cookies is None:
+        page = requests.get(url, headers=HEADERS)
+    else:
+        page = requests.get(url, cookies=cookies, headers=HEADERS)
     soup = BeautifulSoup(page.content, 'html.parser')
     return soup
 
 
-url_of_all_new_personal_home_in_tehran = 'https://divar.ir/s/tehran/real-estate?user_type=personal'
 
 response = get_url_with_bs4(url_of_all_new_personal_home_in_tehran)
 
-# select all items with .kt-post-card--outlined class
-cards = response.select('.kt-post-card--outlined')
+cards = response.select('.kt-col-xxl-4')
 
 main_array = []
 
@@ -37,10 +44,13 @@ for card in cards:
 
     # select the address of the card
     address = card.select(
-        '.kt-post-card__bottom-description')[0].getText().split(' ')[-1]
+        '.kt-post-card__bottom-description')[0].getText().split(' ')
+    index_of_dar = address.index('در')+1
+    # join the word that index is index_of_dar
+    address = ' '.join(address[index_of_dar:])
 
     # select link of the card
-    link = 'https://divar.ir'+card.get('href')
+    link = 'https://divar.ir'+ card.select('a')[0].get('href')
 
     # get the page of link with bs4
     detail_page = get_url_with_bs4(link)
@@ -148,9 +158,11 @@ for card in cards:
         sub_type = ''
 
     token_in_the_url = link.split('/')[-1]
-    contact = requests.get(
-        f'https://api.divar.ir/v5/posts/{token_in_the_url}/contact/', cookies=cookies).json()['widgets']['contact']['phone']
-
+    try:
+        contact = requests.get(
+            f'https://api.divar.ir/v5/posts/{token_in_the_url}/contact/', cookies=cookies).json()['widgets']['contact']['phone']
+    except:
+        contact = ''
     array_of_data.append(title)
     array_of_data.append(price)
     array_of_data.append(address)

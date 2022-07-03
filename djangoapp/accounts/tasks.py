@@ -11,17 +11,16 @@ def main_bongah_task():
       if not Home.objects.filter(title=home['title']).exists():
             new_home=Home(**home)
             new_home.save()
-            print(new_home.title)
+      # 3-get all users
+      users = User.objects.all()
+      # 4-send each user the home with the keyword or neighborhood they want with telegram bot
+      for user in users:
+         homes = Home.objects.filter(
+             title__icontains=user.keywords, address__icontains=user.address)
+
+         print(homes, user)
 
 
    return 'done'   
 
 
-#    # 3-get all users
-   # users = User.objects.all()
-   # # 4-send each user the home with the keyword or neighborhood they want with telegram bot
-   # for user in users:
-   #    homes = Home.objects.filter(
-   #        title__icontains=user.keywords, address__icontains=user.address)
-
-   #    print(homes, user)
