@@ -15,8 +15,8 @@ class RegisterNewUserSerializer(serializers.ModelSerializer):
 
     # validate phone number
     def validate_phone_number(self, value):
-        if not value:
-            raise serializers.ValidationError("Phone number is required")
+        if value is '':
+            return value
 
         regex = r'^\+?1?\d{9,15}$'
         if not re.match(regex, value):

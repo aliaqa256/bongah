@@ -23,11 +23,6 @@ def main_bongah_task():
                   if home['title'] in word.word or home['address'] in word.word:
                         # send the home to the user
                         print(home,user)
-
-
-            
-
-
    return 'done'   
 
 

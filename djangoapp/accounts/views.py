@@ -43,3 +43,16 @@ class AddUserNewKeyWord(APIView):
         user.key_words.add(request.data['key_word'])
         user.save()
         return Response(status=status.HTTP_200_OK)
+
+
+class SetUserPhoneNumberAPIView(APIView):
+    permission_classes = [permissions.AllowAny]
+
+    def patch(self, request, *args, **kwargs):
+        if request.user:
+            user = request.user
+        if 'phone_number' in request.data and 'username' in request.data:
+            user = User.objects.get(phone=request.data['username'])
+        user.phone_number = request.data['phone_number']
+        user.save()
+        return Response(status=status.HTTP_200_OK)
