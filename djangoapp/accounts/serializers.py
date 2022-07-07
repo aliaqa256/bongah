@@ -23,6 +23,11 @@ class RegisterNewUserSerializer(serializers.ModelSerializer):
             raise serializers.ValidationError("Phone number is invalid")
 
         return value
+    
+    def create(self, validated_data):
+        user = User.objects.create_user(**validated_data)
+        user.set_password(validated_data['password'])
+        return user
 
 
 class UserLoginSerializer(TokenObtainPairSerializer):
