@@ -1,0 +1,25 @@
+{% extends "base.html"%}
+{%load static%}
+{% block title %}
+    Login
+{% endblock %}
+
+
+{% block content %}
+<div class="login-back  ">
+
+<div class="login-card  " >
+    <div>
+        <img class="logo-login-card" src="{% static 'images/nezamlogo.png' %}" alt="">
+
+    </div> 
+<br>
+    <form method="post">
+        {% csrf_token %}
+        {{ form }}
+        <br>
+        <input type="submit" value="ورود" class="form-control btn-success ">
+    </form>
+</div>
+</div>
+{% endblock %}

@@ -47,10 +47,17 @@ def register_phone(message):
     })
 
     bot.send_message(chat_id, """شماره موبایل شما ثبت شد""")
+    # send the link for final register for the user
+    link_for_final_register = f'http://127.0.0.1:8000/auth/login_template/'
+    bot.send_message(chat_id, f" یوزر نیم و پسورد شما: {chat_id} لطفا به لینک زیر رفته و ثبت نام خود را کامل کنید")
+    bot.send_message(chat_id, link_for_final_register)
 
 
+def send_homes(chat_id,text):
+    try:
 
-
-
+        bot.send_message(chat_id, text)
+    except :
+        print("error in sending home")
 
 bot.infinity_polling()

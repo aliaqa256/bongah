@@ -1,0 +1,143 @@
+Skip to content
+Search or jump to…
+Pull requests
+Issues
+.my-container {
+	margin-top: 20px;
+}
+#id_position {
+	height: 40px;
+}
+
+.logo-base-header {
+	width: 50px;
+	margin-top: -15px;
+	float: right;
+}
+/* dont show logo-base-header in mobile size */
+@media (max-width: 767px) {
+	.logo-base-header {
+		display: none;
+	}
+}
+
+/* dont show logo-base-header in tablet size */
+@media (min-width: 768px) and (max-width: 991px) {
+	.logo-base-header {
+		display: none;
+	}
+}
+
+
+
+#navbarDropdown {
+	color: rgb(255, 253, 253);
+	font-weight: bold;
+	font-size: 15px;
+	margin-left: 35px;
+}
+
+.dropdown-menu {
+	background-color: rgba(18, 17, 17, 0.7);
+	border-radius: 5px;
+	border: 1px solid white;
+	padding: 5px;
+	width: 100%;
+	margin-bottom: 10px;
+	color: white;
+	font-weight: bold;
+	font-size: 15px;
+	background-color: rgba(18, 17, 17, 0.7);
+}
+.dropdown-menu a {
+	color: white;
+	font-weight: bold;
+	font-size: 15px;
+	margin-left: 35px;
+	float: right;
+}
+
+.base-header-nav {
+	/* dark transparent */
+	background-color: rgba(18, 17, 17, 0.847);
+	/* sticky nav */
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	z-index: 1;
+	box-shadow: 0px 0px 10px rgb(226, 200, 200);
+}
+
+/* login */
+.login-back {
+	background-image: url(../../../static/images/registerback-min.jpg);
+	width: 100%;
+	height: 100%;
+	position: relative;
+	margin-top: -20px;
+}
+
+.login-card {
+	/* make a light transparent card for a form */
+	background-color: rgba(18, 17, 17, 0.7);
+	height: 60%;
+	padding: 20px;
+	border-radius: 10px;
+	top: 15%;
+	left: 25%;
+	position: absolute;
+	width: 50%;
+	overflow: hidden;
+	box-shadow: 0px 0px 10px rgb(226, 200, 200);
+}
+/* set overflow scroll for register-card in mobile size */
+
+@media (max-width: 767px) {
+	.login-card {
+		overflow-y: scroll;
+	}
+}
+
+.logo-login-card {
+	margin-left: 35%;
+	margin-bottom: -25px;
+}
+
+/* select all lables in register card */
+.login-card label {
+	color: white;
+	font-weight: bold;
+}
+.login-card input {
+	border-radius: 5px;
+	border: 1px solid white;
+	padding: 5px;
+	width: 100%;
+	margin-bottom: 10px;
+	color: white;
+	font-weight: bold;
+	font-size: 15px;
+	background-color: rgba(18, 17, 17, 0.7);
+}
+.login-card select {
+	border-radius: 5px;
+	border: 1px solid white;
+	padding: 5px;
+	width: 100%;
+	margin-bottom: 10px;
+	color: white;
+	font-weight: bold;
+	font-size: 15px;
+	background-color: rgba(18, 17, 17, 0.7);
+}
+
+.new-plant-container input {
+	border-radius: 5px;
+	border: 1px solid white;
+	padding: 5px;
+	width: 100%;
+	margin-bottom: 10px;
+	font-weight: bold;
+	font-size: 15px;
+}

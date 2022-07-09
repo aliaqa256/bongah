@@ -1,0 +1,36 @@
+{% extends "base.html"%}
+{%load static%}
+{% block title %}
+    {{title}}
+{% endblock %}
+
+
+{% block content %}
+<div class="login-back  ">
+
+<div class="login-card  " >
+    <div>
+        <img class="logo-login-card" src="{% static 'images/nezamlogo.png' %}" alt="">
+
+    </div> 
+<br>
+    <form method="post">
+        {% csrf_token %}
+        <label for="id_keyword"> کلمات کلیدی </label>
+        <input type="text" name="keyword" placeholder="پاسداران,استخر"id="id_keyword">
+        <!-- select -->
+        <label for="id_days"> مدت تمدید</label>
+        <select id="id_days" name="days">    
+            <option> 30 </option>
+            <option> 20 </option>
+            <option> 10 </option>
+
+        </select>
+        <br>
+        <br>
+        <input type="submit" value="پرداخت" class="form-control btn-success ">
+
+    </form>
+</div>
+</div>
+{% endblock %}
