@@ -52,10 +52,14 @@ class User(AbstractBaseUser):
         verbose_name='created date', auto_now_add=True)
     update_date = models.DateTimeField(
         verbose_name='update date', auto_now=True)
+    days_left=models.IntegerField(verbose_name='days_left',blank=True, null=True)
 
     # phone number with validation
     phone_number = models.CharField(
         verbose_name='phone number', max_length=15, validators=[PhoneValidator], blank=True, null=True)
+
+
+    
 
 
 
@@ -77,6 +81,13 @@ class User(AbstractBaseUser):
     @property
     def is_staff(self):
         return self.staff
+
+    @property
+    def has_day_left(self):
+        if self.days_left>0:
+            return True
+        else:
+            return False
 
     def __str__(self):
         return "{}".format(self.username)

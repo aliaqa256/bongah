@@ -28,7 +28,7 @@ def main_bongah_task():
                         # send the home to the user
             send_homes(
                 int(user.username), f" {home['title']} #{home['address']}  {home['description']} {home['price']}  {home['year']} {home['rooms']} {home['floor']} {home['parking']} {home['elevator']} {home['price_per_meter']}  {home['total_price']} {home['contact']}  #{home['type_of_sell']} \
-                  #{home['main_type']} #{home['sub_type']}  ")
+                  #{home['main_type']} #{home['sub_type']}  {home['link']} ")
 
       return 'done'   
 
@@ -47,3 +47,10 @@ def home_deleter():
 
 
 # TODO add task for reduce the day per day
+@shared_task
+def reduceUserDaysLeft():
+    users = User.objects.filter(has_day_left=True)
+    for user in users:
+      user.days_left = user.days_left - 1
+      user.save()
+
