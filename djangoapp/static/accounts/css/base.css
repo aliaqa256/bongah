@@ -141,3 +141,19 @@ Issues
 	font-weight: bold;
 	font-size: 15px;
 }
+
+.cartpage{
+
+/* make a light transparent card for a form */
+	
+	height: 60%;
+	padding: 20px;
+	border-radius: 10px;
+	top: 15%;
+	left: 25%;
+	position: absolute;
+	width: 50%;
+	overflow: hidden;
+	box-shadow: 0px 0px 10px rgb(226, 200, 200);
+
+}

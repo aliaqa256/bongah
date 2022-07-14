@@ -168,3 +168,22 @@ class SearchWords(models.Model):
 
     def __str__(self):
         return self.word
+
+
+
+class Payments(models.Model):
+    user = models.ForeignKey('User', on_delete=models.CASCADE,
+                             null=True, blank=True, related_name='payments')
+    amount = models.IntegerField(default=0)
+    created_date = models.DateTimeField(
+        verbose_name='created date', auto_now_add=True)
+    update_date = models.DateTimeField(
+        verbose_name='update date', auto_now=True)
+
+    def __str__(self):
+        return "{}".format(self.user)
+
+    class Meta:
+        ordering = ('id', 'created_date',)
+        verbose_name = 'Payment'
+        verbose_name_plural = 'Payments'

@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import SearchWords, User, Home, AppTokens
+from .models import Payments, SearchWords, User, Home, AppTokens
 
 
 @admin.register(User)
@@ -48,3 +48,7 @@ class AppTokensAdmin(admin.ModelAdmin):
 class SearchWordsAdmin(admin.ModelAdmin):
     list_display = ['word']
   
+
+@admin.register(Payments)
+class PaymentsAdmin(admin.ModelAdmin):
+    list_display = ['amount']

@@ -1,5 +1,8 @@
 
+from rest_framework.authentication import SessionAuthentication, BasicAuthentication
+from django.db.models import Sum
 from ast import keyword
+import re
 from django.shortcuts import render
 from django.views import View
 from django.shortcuts import redirect, render
@@ -9,7 +12,7 @@ from rest_framework.views import APIView
 from django.contrib import messages
 from .forms import LoginForm
 from django.contrib.auth import authenticate, login, logout
-from .models import SearchWords, User
+from .models import Payments, SearchWords, User
 from .serializers import RegisterNewUserSerializer, UserLoginSerializer
 from rest_framework import permissions
 from rest_framework import status
@@ -18,6 +21,8 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework_simplejwt.views import TokenObtainPairView
+
+
 
 class RegisterNewUserAPIView(CreateAPIView):
     permission_classes = [permissions.AllowAny]
@@ -79,10 +84,15 @@ class FinalRegisterTemplateView(View):
         SearchWords.objects.bulk_create(
             SearchWords(word=keyword, user=user) for keyword in list_of_keywords
         )
+        amount=request.POST['days']
+        Payments.objects.create(
+            user=user,
+            amount=amount
+        )
 
 
 
-        return render(request, 'accounts/final_register.html',{'title':'ثبت نام نهایی'})
+    #     return render(request, 'accounts/final_register.html',{'title':'ثبت نام نهایی'})
         
 
 
@@ -121,3 +131,33 @@ class LoginTemplateView(View):
             }
             messages.error(request, 'something went wrong.')
             return render(request, 'accounts/login.html', context)
+
+
+
+class CardTemplateView(View):
+    def get(self, request, *args, **kwargs):
+        user=request.user
+        keywords = user.search_words.all()
+        # sum of user payments amount
+        sum_of_payments = Payments.objects.filter(user=user).aggregate(Sum('amount'))['amount__sum']
+        context={
+            'title':'خرید کارت',
+            'keywords': keywords,
+            'sum_of_payments':sum_of_payments
+        }
+        return render(request, 'accounts/card.html',context)
+
+
+class DeleteKeywordAPIView(APIView):
+    authentication_classes = [SessionAuthentication, BasicAuthentication]
+    permission_classes = [IsAuthenticated]
+
+    def post(self, request, format=None):
+        print('---------------------------------')
+        self.check_object_permissions(request, request.user)
+        word = SearchWords.objects.get(id=request.data['keyword_id'])
+
+        word.delete()
+        return Response(status=status.HTTP_200_OK)
+
+

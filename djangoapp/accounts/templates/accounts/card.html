@@ -1,0 +1,45 @@
+{% extends "base.html"%}
+{%load static%}
+{% block title %}
+{{title}}
+{% endblock %}
+
+
+{% block content %}
+
+<div class="cartpage">
+
+
+<ul class="list-group">
+
+    {% for keyword in keywords  %}
+  <li class="list-group-item d-flex justify-content-between align-items-center">
+   {{keyword}}
+   <button onclick="deleteKeyword({{keyword.id}})" type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+
+</button>
+  </li>
+{% endfor %}
+</ul>
+<br>
+
+<div>
+
+    قابل پرداخت :{{sum_of_payments}}
+</div>
+
+
+
+
+
+
+
+
+</div>
+
+
+
+
+{% endblock %}
+
