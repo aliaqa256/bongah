@@ -15,4 +15,10 @@ urlpatterns = [
 
     path('login_template/', views.LoginTemplateView.as_view(), name='login'),
     path('card/', views.CardTemplateView.as_view(), name='card'),
+    path('select_plan/', views.SelectPlanTemplateView.as_view(), name="select_plan"),
+
+    # //
+    path('payment', views.payment_start, name='payment_start'),
+    path('payment/return', views.payment_return, name='payment_return'),
+    path('payment/check/<pk>', views.payment_check, name='payment_check'),
 ]

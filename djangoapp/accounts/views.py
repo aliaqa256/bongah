@@ -1,4 +1,5 @@
 
+from trace import Trace
 from rest_framework.authentication import SessionAuthentication, BasicAuthentication
 from django.db.models import Sum
 from ast import keyword
@@ -22,6 +23,14 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework_simplejwt.views import TokenObtainPairView
 
+
+from django.shortcuts import render, get_object_or_404, redirect
+from django.views.decorators.csrf import csrf_exempt
+from idpay.api import IDPayAPI
+from .models import MainPayed
+import requests
+import json
+import uuid
 
 
 class RegisterNewUserAPIView(CreateAPIView):
@@ -76,7 +85,6 @@ class FinalRegisterTemplateView(View):
         return render(request, 'accounts/final_register.html',context)
 
     def post(self, request, *args, **kwargs):
-        print(request.POST['days'])
         user=request.user
         keyword = request.POST['keyword']
         list_of_keywords = keyword.split(',')
@@ -84,15 +92,12 @@ class FinalRegisterTemplateView(View):
         SearchWords.objects.bulk_create(
             SearchWords(word=keyword, user=user) for keyword in list_of_keywords
         )
-        amount=request.POST['days']
-        Payments.objects.create(
-            user=user,
-            amount=amount
-        )
 
 
 
-    #     return render(request, 'accounts/final_register.html',{'title':'ثبت نام نهایی'})
+
+        return redirect('/auth/select_plan')
+        # return render(request, 'accounts/final_register.html',{'title':'ثبت نام نهایی'})
         
 
 
@@ -161,3 +166,135 @@ class DeleteKeywordAPIView(APIView):
         return Response(status=status.HTTP_200_OK)
 
 
+class SelectPlanTemplateView(View):
+    def get(self, request, *args, **kwargs):
+        context = {
+            'title': 'انتخاب پلن',
+        }
+        return render(request, 'accounts/select_plan.html', context)
+
+    def post(self, request, *args, **kwargs):
+        user = request.user
+        price = request.POST['plan_type']
+        Payments.objects.create(user=user, amount=price)
+        return redirect('accounts:card')
+
+
+# ///////////////////////////////////////
+def payment_init():
+    base_url = "http://127.0.0.1:8000/"
+    api_key = 'b93732b3-9473-40ad-a275-933d90fe0532'
+    sandbox = "true"
+
+    return IDPayAPI(api_key, base_url, True)
+
+
+def payment_start(request):
+    if request.method == 'POST':
+
+        order_id = uuid.uuid1()
+        # amount = request.POST.get('amount')
+        amount="1000"
+
+        payer = {
+            'name': request.POST.get('name'),
+            'phone': request.POST.get('phone'),
+            'mail': request.POST.get('mail'),
+            'desc': request.POST.get('desc'),
+        }
+
+        record = MainPayed(order_id=order_id, amount=int(amount))
+        print('*******')
+        print(record)
+        record.save()
+
+        idpay_payment = payment_init()
+        result = idpay_payment.payment(
+            str(order_id), amount, 'auth/payment/return', payer)
+
+        if 'id' in result:
+            record.status = 1
+            record.payment_id = result['id']
+            record.save()
+
+            return redirect(result['link'])
+
+        else:
+            txt = result['message']
+    else:
+        txt = "Bad Request"
+        print('----------------------------------')
+
+    return render(request, 'accounts/error.html', {'txt': txt})
+
+
+@csrf_exempt
+def payment_return(request):
+    if request.method == 'POST':
+
+        pid = request.POST.get('id')
+        status = request.POST.get('status')
+        pidtrack = request.POST.get('track_id')
+        order_id = request.POST.get('order_id')
+        amount = request.POST.get('amount')
+        card = request.POST.get('card_no')
+        date = request.POST.get('date')
+
+        if MainPayed.objects.filter(order_id=order_id, payment_id=pid, amount=amount, status=1).count() == 1:
+
+            idpay_payment = payment_init()
+
+            payment = MainPayed.objects.get(payment_id=pid, amount=amount)
+            payment.status = status
+            payment.date = str(date)
+            payment.card_number = card
+            payment.idpay_track_id = pidtrack
+            payment.save()
+
+            if str(status) == '10':
+                result = idpay_payment.verify(pid, payment.order_id)
+
+                if 'status' in result:
+
+                    payment.status = result['status']
+                    payment.bank_track_id = result['payment']['track_id']
+                    payment.save()
+                    # if status is 100 then payment is success
+                    #TODO make payment success and redirect to success page and add the days
+
+                    return render(request, 'accounts/error.html', {'txt': result['message']})
+
+                else:
+                    txt = result['message']
+
+            else:
+                txt = "Error Code : " + \
+                    str(status) + "   |   " + "Description : " + \
+                    idpay_payment.get_status(status)
+
+        else:
+            txt = "Order Not Found"
+
+    else:
+        txt = "Bad Request"
+
+    return render(request, 'accounts/error.html', {'txt': txt})
+
+
+def payment_check(request, pk):
+
+    payment = MainPayed.objects.get(pk=pk)
+
+    idpay_payment = payment_init()
+    result = idpay_payment.inquiry(payment.payment_id, payment.order_id)
+
+    if 'status' in result:
+
+        payment.status = result['status']
+        payment.idpay_track_id = result['track_id']
+        payment.bank_track_id = result['payment']['track_id']
+        payment.card_number = result['payment']['card_no']
+        payment.date = str(result['date'])
+        payment.save()
+
+    return render(request, 'accounts/error.html', {'txt': result['message']})

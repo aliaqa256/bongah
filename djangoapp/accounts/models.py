@@ -175,6 +175,7 @@ class Payments(models.Model):
     user = models.ForeignKey('User', on_delete=models.CASCADE,
                              null=True, blank=True, related_name='payments')
     amount = models.IntegerField(default=0)
+    is_done = models.BooleanField(default=False)
     created_date = models.DateTimeField(
         verbose_name='created date', auto_now_add=True)
     update_date = models.DateTimeField(
@@ -187,3 +188,19 @@ class Payments(models.Model):
         ordering = ('id', 'created_date',)
         verbose_name = 'Payment'
         verbose_name_plural = 'Payments'
+
+
+class MainPayed(models.Model):
+
+    order_id = models.TextField()
+    payment_id = models.TextField()
+    amount = models.IntegerField()
+    date = models.TextField(default='-')
+
+    card_number = models.TextField(default="****")
+    idpay_track_id = models.IntegerField(default=0000)
+    bank_track_id = models.TextField(default=0000)
+
+    status = models.IntegerField(default=0)
+
+
