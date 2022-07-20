@@ -14,4 +14,6 @@ urlpatterns = [
          name='final_register'),
 
     path('login_template/', views.LoginTemplateView.as_view(), name='login'),
+
+    path('select_plan/', views.SelectPlanTemplateView.as_view(), name="select_plan"),
 ]

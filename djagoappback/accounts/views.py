@@ -121,3 +121,18 @@ class LoginTemplateView(View):
             }
             messages.error(request, 'something went wrong.')
             return render(request, 'accounts/login.html', context)
+
+
+
+class SelecetPlanTemplateView(View):
+    def get(self, request, *args, **kwargs):
+        context={
+            'title':'انتخاب پلن',
+        }
+        return render(request, 'accounts/select_plan.html',context)
+
+    def post(self, request, *args, **kwargs):
+        user=request.user
+        user.plane_type=request.POST['plan_type']
+        user.save()
+        return redirect('accounts:final_register')
