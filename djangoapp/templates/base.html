@@ -26,40 +26,32 @@
 <!------ Include the above in your HEAD tag ---------->
 
 <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
-
+    <link rel="stylesheet" href="{% static 'accounts/css/base.css' %}" >
 
 
 
     <title>
+
+
       {% block title %} {% endblock %}
     </title>
-    <link rel="stylesheet" href="{% static 'accounts/css/base.css' %}" >
+
 
     
-
-
-    <style>
-      *{
-        direction: rtl;
-      }
-      label{
-        float: right;
-      }
 
  
 
 
 
-    </style>
 </head>
-<body>
+<body >
    {% include 'common/header.html' %}
    {% include 'common/messages.html' %}
 
-   <div class="my-container">
+   <div class="base-content">
      
      {% block content %}{% endblock %}
-    </div>
+   </div>
     
 </body>
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>

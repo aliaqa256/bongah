@@ -1,33 +1,223 @@
-Skip to content
-Search or jump to…
-Pull requests
-Issues
-.my-container {
-	margin-top: 20px;
-}
-#id_position {
-	height: 40px;
+
+.nav-bar{
+	background-color: #230707;
+
 }
 
-.logo-base-header {
-	width: 50px;
-	margin-top: -15px;
-	float: right;
+.base-content{
+/* a dark base content */
+	background-color: rgba(227, 80, 80, 0.847);
+	border-radius: 10px;
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+	box-shadow: 0px 0px 10px rgb(226, 200, 200);
+	position: relative;
+
 }
-/* dont show logo-base-header in mobile size */
+
+.login-card {
+	/* make a light transparent card for a form */
+	background-color: rgba(18, 17, 17, 0.7);
+	height: 60%;
+	padding: 20px;
+	border-radius: 10px;
+	top: 15%;
+	left: 25%;
+	position: absolute;
+	width: 50%;
+	overflow: hidden;
+	box-shadow: 0px 0px 10px rgb(226, 200, 200);
+}
+/* set overflow scroll for register-card in mobile size */
+
 @media (max-width: 767px) {
-	.logo-base-header {
-		display: none;
+	.login-card {
+		overflow-y: scroll;
 	}
 }
 
-/* dont show logo-base-header in tablet size */
-@media (min-width: 768px) and (max-width: 991px) {
-	.logo-base-header {
-		display: none;
+.login-card label {
+	color: white;
+	font-weight: bold;
+
+}
+.login-card input {
+	border-radius: 5px;
+	border: 1px solid white;
+	padding: 5px;
+	width: 100%;
+	margin-bottom: 10px;
+	color: white;
+	font-weight: bold;
+	font-size: 15px;
+	background-color: rgba(18, 17, 17, 0.7);
+}
+
+
+.login-left{
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 50%;
+	height: 100%;
+	border-radius: 10px;
+	box-shadow: 0px 0px 10px rgb(226, 200, 200);
+	padding: 20px;
+}
+
+.login-right{
+	position: absolute;
+	top: 0;
+	right: 0;
+	width: 50%;
+	height: 100%;
+	border-radius: 10px;
+	box-shadow: 0px 0px 10px rgb(226, 200, 200);
+	padding: 20px;
+	/* url django static */
+	background-image: url(/static/images/20220707-HecetaHead_ROW4496632832_UHD.jpg);
+	background-size: cover;
+}
+.login-from-container{
+	position: relative;
+	width: 80%;
+	height: 100%;
+	overflow: hidden;
+	top: 10%;
+/* make center */
+	margin: 0 auto;
+
+}
+
+
+.key-from-container{
+	position: relative;
+	width: 80%;
+	height: 100%;
+	overflow: hidden;
+	top: 10%;
+/* make center */
+	margin: 0 auto;
+	
+}
+
+.key-card {
+	/* make a light transparent card for a form */
+	background-color: rgba(18, 17, 17, 0.7);
+	height: 60%;
+	padding: 20px;
+	border-radius: 10px;
+	top: 15%;
+	left: 25%;
+	position: absolute;
+	width: 50%;
+	overflow: hidden;
+	box-shadow: 0px 0px 10px rgb(226, 200, 200);
+}
+@media (max-width: 767px) {
+	.key-card {
+		overflow-y: scroll;
 	}
 }
 
+
+
+.key-card label {
+	color: white;
+	font-weight: bold;
+
+}
+.key-card input {
+	border-radius: 5px;
+	border: 1px solid white;
+	padding: 5px;
+	width: 100%;
+	margin-bottom: 10px;
+	color: white;
+	font-weight: bold;
+	font-size: 15px;
+	background-color: rgba(18, 17, 17, 0.7);
+
+
+
+}
+
+
+.key-help{
+		color: white;
+	font-weight: bold;
+	direction: rtl;
+	text-align: right;
+}
+
+
+
+.plan-card{
+
+	background-color: rgba(18, 17, 17, 0.7);
+	height: 80%;
+	padding: 20px;
+	border-radius: 10px;
+	top: 12%;
+	left: 10%;
+	position: absolute;
+	width: 80%;
+	overflow: hidden;
+	box-shadow: 0px 0px 10px rgb(226, 200, 200);
+
+}
+
+
+@media (max-width: 767px) {
+	.plan-card {
+		overflow-y: scroll;
+	}
+}
+
+.card-page{
+	/* make a light transparent card for a form */
+	background-color: rgba(18, 17, 17, 0.7);
+	height: 70%;
+	padding: 20px;
+	border-radius: 10px;
+	top: 12%;
+	left: 15%;
+	position: absolute;
+	width: 70%;
+	overflow: auto;
+	box-shadow: 0px 0px 10px rgb(226, 200, 200);
+}
+
+.key-item{
+	background-color: #23070723;
+	color: rgb(244, 238, 238);
+}
+.btn-card-btn{
+	color: rgb(222, 211, 211);
+}
+
+.pardakht{
+
+color: #ffffff;
+text-align: center;
+
+}
+.pay-btn{
+	background-color: #230707;
+	color: #ffffff;
+	border-radius: 10px;
+	padding: 10px;
+	width: 60%;
+	margin-bottom: 10px;
+	font-weight: bold;
+	font-size: 15px;
+	box-shadow: 0px 0px 10px rgb(226, 200, 200);
+	/* make center */
+	position: absolute;
+	left: 20%;
+}
+/*//////////////////  */
 
 
 #navbarDropdown {
@@ -68,92 +258,27 @@ Issues
 	z-index: 1;
 	box-shadow: 0px 0px 10px rgb(226, 200, 200);
 }
+/* plan page */
+ body{
+      background-color: #E0E0E0;
+ }
+ .card-pricing.popular {
+                z-index: 1;
+                border: 1px solid #007bff;
+            }
+            .card-pricing .list-unstyled li {
+                padding: .5rem 0;
+                color: #6c757d;
+                font-weight: 300;
+            }
 
-/* login */
-.login-back {
-	background-image: url(../../../static/images/registerback-min.jpg);
-	width: 100%;
-	height: 100%;
-	position: relative;
-	margin-top: -20px;
-}
+            .btn{
+                border-radius: 1px;
+                font-weight:300;
+            }
+            .hvr:hover{
 
-.login-card {
-	/* make a light transparent card for a form */
-	background-color: rgba(18, 17, 17, 0.7);
-	height: 60%;
-	padding: 20px;
-	border-radius: 10px;
-	top: 15%;
-	left: 25%;
-	position: absolute;
-	width: 50%;
-	overflow: hidden;
-	box-shadow: 0px 0px 10px rgb(226, 200, 200);
-}
-/* set overflow scroll for register-card in mobile size */
-
-@media (max-width: 767px) {
-	.login-card {
-		overflow-y: scroll;
-	}
-}
-
-.logo-login-card {
-	margin-left: 35%;
-	margin-bottom: -25px;
-}
-
-/* select all lables in register card */
-.login-card label {
-	color: white;
-	font-weight: bold;
-}
-.login-card input {
-	border-radius: 5px;
-	border: 1px solid white;
-	padding: 5px;
-	width: 100%;
-	margin-bottom: 10px;
-	color: white;
-	font-weight: bold;
-	font-size: 15px;
-	background-color: rgba(18, 17, 17, 0.7);
-}
-.login-card select {
-	border-radius: 5px;
-	border: 1px solid white;
-	padding: 5px;
-	width: 100%;
-	margin-bottom: 10px;
-	color: white;
-	font-weight: bold;
-	font-size: 15px;
-	background-color: rgba(18, 17, 17, 0.7);
-}
-
-.new-plant-container input {
-	border-radius: 5px;
-	border: 1px solid white;
-	padding: 5px;
-	width: 100%;
-	margin-bottom: 10px;
-	font-weight: bold;
-	font-size: 15px;
-}
-
-.cartpage{
-
-/* make a light transparent card for a form */
-	
-	height: 60%;
-	padding: 20px;
-	border-radius: 10px;
-	top: 15%;
-	left: 25%;
-	position: absolute;
-	width: 50%;
-	overflow: hidden;
-	box-shadow: 0px 0px 10px rgb(226, 200, 200);
-
-}
+                color: #fff;
+                background-color: #007bff;
+                border: 1px solid #007bff !important;
+            } 

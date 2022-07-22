@@ -24,8 +24,8 @@ urlpatterns = [
     path('payments/',include('zarinpal.urls')),
     path('',RedirectView.as_view(url='auth/login_template/', permanent=False), name='index')
 ]
-# if settings.DEBUG == True:
-#     urlpatterns += static(settings.STATIC_URL,
-#                           document_root=settings.STATIC_ROOT)
-#     urlpatterns += static(settings.MEDIA_URL,
-#                           document_root=settings.MEDIA_ROOT)
+if settings.DEBUG == True:
+    urlpatterns += static(settings.STATIC_URL,
+                          document_root=settings.STATIC_ROOT)
+    urlpatterns += static(settings.MEDIA_URL,
+                          document_root=settings.MEDIA_ROOT)

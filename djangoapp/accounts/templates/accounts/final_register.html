@@ -6,22 +6,46 @@
 
 
 {% block content %}
-<div class="login-back  ">
-
-<div class="login-card  container " >
-
-<br>
+<div class="key-card">
+<div class="key-from-container">
     <form method="post" class=""  >
         {% csrf_token %}
         <label for="id_keyword"> کلمات کلیدی </label>
         <input type="text" name="keyword" placeholder="پاسداران,استخر"id="id_keyword" class="form-control">
         <!-- select -->
       
-        <br>
-        <br>
         <input type="submit" value=" ثبت" class="form-control btn-success ">
 
     </form>
+
+    <br>    
+    <br>
+    <br>
+    <div class="key-help">
+
+    <ul>
+        <li>
+
+            در این قسمت میتوانید کلمات کلیدی که میخواهید خانه ها را با آن جستجو کنید وارد کنید 
+        </li>
+
+              <li>
+
+این اطلاعات میتواند مانند نام محله یا امکانات ان خانه باشد        </li>
+
+
+
+<li> لطفا کلمه ها را با , جدا کنید</li>
+
+    </ul>
+
+
 </div>
+    </div>
+
+
+
+
+
 </div>
 {% endblock %}

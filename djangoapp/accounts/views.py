@@ -144,7 +144,7 @@ class CardTemplateView(View):
         user=request.user
         keywords = user.search_words.all()
         # sum of user payments amount
-        sum_of_payments = Payments.objects.filter(user=user).aggregate(Sum('amount'))['amount__sum']
+        sum_of_payments = Payments.objects.filter(user=user, is_done=False).aggregate(Sum('amount'))['amount__sum'] or 0
         context={
             'title':'خرید کارت',
             'keywords': keywords,
@@ -260,7 +260,7 @@ def payment_return(request):
                     payment.bank_track_id = result['payment']['track_id']
                     payment.save()
                     # if status is 100 then payment is success
-                    #TODO make payment success and redirect to success page and add the days
+                    Payments.objects.filter(is_done=False).update(is_done=True)
 
                     return render(request, 'accounts/error.html', {'txt': result['message']})
 
