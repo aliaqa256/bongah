@@ -8,29 +8,25 @@ from .validators import PhoneValidator
 
 
 class UserManager(BaseUserManager):
-    def create_user(self, username, phone_number, password=None, **kwargs):
+    def create_user(self, username, password=None, **kwargs):
         if not username:
             raise ValueError("Users must have username")
         if not password:
             raise ValueError("Users must have password")
-        if not phone_number:
-            raise ValueError("Users must have phone_number")
-        user = self.model(username=username,
-                          phone_number=phone_number, **kwargs)
+
+        user = self.model(username=username, **kwargs)
         user.set_password(password)
         user.save()
         return user
 
-    def create_staffuser(self, username, phone_number, password, **kwargs):
-        user = self.model(username=username,
-                          phone_number=phone_number, staff=True, **kwargs)
+    def create_staffuser(self, username, password, **kwargs):
+        user = self.model(username=username, staff=True, **kwargs)
         user.set_password(password)
         user.save()
         return user
 
-    def create_superuser(self, username, phone_number, password, **kwargs):
-        user = self.model(username=username, phone_number=phone_number,
-                          staff=True, superuser=True, active=True, **kwargs)
+    def create_superuser(self, username, password, **kwargs):
+        user = self.model(username=username,staff=True, superuser=True, active=True, **kwargs)
         user.set_password(password)
         user.save()
         return user

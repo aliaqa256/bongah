@@ -19,7 +19,7 @@ def main_bongah_task():
             new_home.save()
             print("one home is saved in db")
                                                     # days left > 0
-        users = User.objects.filter(is_active=True, days_left__gt=0)
+        users = User.objects.filter(active=True, days_left__gt=0)
         for user in users:
             user_searchwords = user.search_words.all()
             for word in user_searchwords:

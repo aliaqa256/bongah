@@ -70,7 +70,7 @@ class SetUserPhoneNumberAPIView(APIView):
         if request.user:
             user = request.user
         if 'phone_number' in request.data and 'username' in request.data:
-            user = User.objects.get(phone=request.data['username'])
+            user = User.objects.get(username=request.data['username'])
         user.phone_number = request.data['phone_number']
         user.save()
         return Response(status=status.HTTP_200_OK)
