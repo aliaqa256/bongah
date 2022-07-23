@@ -26,53 +26,24 @@ def main_bongah_task():
                   if  word.word in home['title'] or word.word  in home['address'] :
                         send_homes(
                         int(user.username), 
-                            f"""
-                            {home['title']}
-
-                            {home['description']}
-
-                             {home['price']}  
-
-                            address: {home['address']}
-
-
-                            sale sakht :  {home['year']} 
-
-                            otagh:   {home['rooms']}    
-
-                            tabaqe: {home['floor']}   
-
-                            parking : {home['parking']} 
-
-                            asansor: {home['elevator']}  
-
-                            qeymat har metr: {home['price_per_meter']}  
-
-                            qyemat kol: {home['total_price']} 
-
-
-                            shomare tamas:{home['contact']}   
-
-                            #{home['type_of_sell']}
-                            #{home['main_type']}
-                            #{home['sub_type']} 
-
-
-                            link divar :{home['link']}
-
-
-
-
-
-
-                            
-                        
-                        
-                        
-                        
-                        
-                        
-                           """
+f"""
+{home['title']}
+{home['description']}
+{home['price']}  
+address: {home['address']}
+sale sakht :  {home['year']} 
+otagh:   {home['rooms']}    
+tabaqe: {home['floor']}   
+parking : {home['parking']} 
+asansor: {home['elevator']}  
+qeymat har metr: {home['price_per_meter']}  
+qyemat kol: {home['total_price']} 
+shomare tamas:{home['contact']}   
+#{home['type_of_sell']}
+#{home['main_type']}
+#{home['sub_type']} 
+link divar :{home['link']}
+"""
 
 
                                )
