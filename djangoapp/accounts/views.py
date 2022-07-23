@@ -261,6 +261,19 @@ def payment_return(request):
                     payment.save()
                     # if status is 100 then payment is success
                     Payments.objects.filter(is_done=False).update(is_done=True)
+                    if amount == 100 :
+                        user = request.user
+                        user.day_left=user.day_left+30
+                        user.save()
+                    elif amount ==200:
+                        user = request.user
+                        user.day_left = user.day_left+60
+                        user.save()
+                    elif amount== 1000:
+                        user = request.user
+                        user.day_left=user.day_left+365
+                        user.save()
+
 
                     return render(request, 'accounts/error.html', {'txt': result['message']})
 
