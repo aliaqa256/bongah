@@ -23,7 +23,7 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework_simplejwt.views import TokenObtainPairView
 
-
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, get_object_or_404, redirect
 from django.views.decorators.csrf import csrf_exempt
 from idpay.api import IDPayAPI
@@ -76,7 +76,7 @@ class SetUserPhoneNumberAPIView(APIView):
         return Response(status=status.HTTP_200_OK)
 
 
-
+@login_required(login_url='auth/login_template/')
 class FinalRegisterTemplateView(View):
     def get(self, request,*args, **kwargs):
         context={
@@ -104,6 +104,9 @@ class FinalRegisterTemplateView(View):
 
 class LoginTemplateView(View):
     def get(self, request, *args, **kwargs):
+        # if user is login
+        if request.user.is_authenticated:
+            return redirect('accounts:card')
         form = LoginForm()
         context={
             'title':'ورود',
@@ -138,7 +141,7 @@ class LoginTemplateView(View):
             return render(request, 'accounts/login.html', context)
 
 
-
+@login_required(login_url='auth/login_template/')
 class CardTemplateView(View):
     def get(self, request, *args, **kwargs):
         user=request.user
@@ -166,6 +169,7 @@ class DeleteKeywordAPIView(APIView):
         return Response(status=status.HTTP_200_OK)
 
 
+@login_required(login_url='auth/login_template/')
 class SelectPlanTemplateView(View):
     def get(self, request, *args, **kwargs):
         context = {
@@ -182,7 +186,7 @@ class SelectPlanTemplateView(View):
 
 # ///////////////////////////////////////
 def payment_init():
-    base_url = "http://127.0.0.1:8000/"
+    base_url = "http://moshaveryar-bot.ir/"
     api_key = 'b93732b3-9473-40ad-a275-933d90fe0532'
     sandbox = "true"
 
