@@ -18,8 +18,8 @@ def main_bongah_task():
             new_home = Home(**home)
             new_home.save()
             print("one home is saved in db")
-
-        users = User.objects.filter(is_active=True, has_day_left=True)
+                                                    # days left > 0
+        users = User.objects.filter(is_active=True, days_left__gt=0)
         for user in users:
             user_searchwords = user.search_words.all()
             for word in user_searchwords:
@@ -48,7 +48,7 @@ def home_deleter():
 
 @shared_task
 def reduceUserDaysLeft():
-    users = User.objects.filter(has_day_left=True)
+    users = User.objects.filter(days_left__gt=0)
     for user in users:
         user.days_left = user.days_left - 1
         user.save()
