@@ -30,8 +30,8 @@ def divar_scraper():
         title = card.select('.kt-post-card__title')[0].getText()
         # select the price of the card
         # if home with this title is in database, skip it
-        # if Home.objects.filter(title=title).exists():
-        #     continue
+        if Home.objects.filter(title=title).exists():
+            continue
 
         try:
             price = card.select('.kt-post-card__description')[0].getText()
