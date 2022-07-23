@@ -25,11 +25,57 @@ def main_bongah_task():
             for word in user_searchwords:
                   if  word.word in home['title'] or word.word  in home['address'] :
                         send_homes(
-                        int(user.username), f" {home['title']} \n #{home['address']} \n \
-                        {home['description']} \n{home['price']} \n {home['year']}\n  {home['rooms']} \n  \
-                              {home['floor']} \n {home['parking']} \n {home['elevator']} \n \
-                              {home['price_per_meter']}  \n {home['total_price']} \n {home['contact']}  \n #{home['type_of_sell']} \
-                              #{home['main_type']} #{home['sub_type']}  {home['link']} ")
+                        int(user.username), 
+                            f"""
+                            {home['title']}
+
+                            {home['description']}
+
+                             {home['price']}  
+
+                            address: {home['address']}
+
+
+                            sale sakht :  {home['year']} 
+
+                            otagh:   {home['rooms']}    
+
+                            tabaqe: {home['floor']}   
+
+                            parking : {home['parking']} 
+
+                            asansor: {home['elevator']}  
+
+                            qeymat har metr: {home['price_per_meter']}  
+
+                            qyemat kol: {home['total_price']} 
+
+
+                            shomare tamas:{home['contact']}   
+
+                            #{home['type_of_sell']}
+                            #{home['main_type']}
+                            #{home['sub_type']} 
+
+
+                            link divar :{home['link']}
+
+
+
+
+
+
+                            
+                        
+                        
+                        
+                        
+                        
+                        
+                           """
+
+
+                               )
 
         return 'done'
 
