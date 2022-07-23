@@ -196,6 +196,8 @@ class MainPayed(models.Model):
     card_number = models.TextField(default="****")
     idpay_track_id = models.IntegerField(default=0000)
     bank_track_id = models.TextField(default=0000)
+    user=models.ForeignKey('User', on_delete=models.CASCADE,
+                             null=True, blank=True, related_name='mainpayed')
 
     status = models.IntegerField(default=0)
 

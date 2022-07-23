@@ -76,14 +76,13 @@ class SetUserPhoneNumberAPIView(APIView):
         return Response(status=status.HTTP_200_OK)
 
 
-@login_required(login_url='auth/login_template/')
+
 class FinalRegisterTemplateView(View):
     def get(self, request,*args, **kwargs):
         context={
             'title':'ثبت نام نهایی',
         }
         return render(request, 'accounts/final_register.html',context)
-
     def post(self, request, *args, **kwargs):
         user=request.user
         keyword = request.POST['keyword']
@@ -141,7 +140,7 @@ class LoginTemplateView(View):
             return render(request, 'accounts/login.html', context)
 
 
-@login_required(login_url='auth/login_template/')
+
 class CardTemplateView(View):
     def get(self, request, *args, **kwargs):
         user=request.user
@@ -169,14 +168,13 @@ class DeleteKeywordAPIView(APIView):
         return Response(status=status.HTTP_200_OK)
 
 
-@login_required(login_url='auth/login_template/')
+
 class SelectPlanTemplateView(View):
     def get(self, request, *args, **kwargs):
         context = {
             'title': 'انتخاب پلن',
         }
         return render(request, 'accounts/select_plan.html', context)
-
     def post(self, request, *args, **kwargs):
         user = request.user
         price = request.POST['plan_type']
@@ -186,7 +184,7 @@ class SelectPlanTemplateView(View):
 
 # ///////////////////////////////////////
 def payment_init():
-    base_url = "http://moshaveryar-bot.ir/"
+    base_url = "https://moshaveryar-bot.ir/"
     api_key = 'b93732b3-9473-40ad-a275-933d90fe0532'
     sandbox = "true"
 
@@ -197,8 +195,8 @@ def payment_start(request):
     if request.method == 'POST':
 
         order_id = uuid.uuid1()
-        # amount = request.POST.get('amount')
-        amount="1000"
+        amount = request.POST.get('amount')
+        user=User.objects.get(username=request.POST.get('name'))
 
         payer = {
             'name': request.POST.get('name'),
@@ -207,9 +205,7 @@ def payment_start(request):
             'desc': request.POST.get('desc'),
         }
 
-        record = MainPayed(order_id=order_id, amount=int(amount))
-        print('*******')
-        print(record)
+        record = MainPayed(order_id=order_id, amount=int(amount),user=user)
         record.save()
 
         idpay_payment = payment_init()
@@ -243,6 +239,7 @@ def payment_return(request):
         amount = request.POST.get('amount')
         card = request.POST.get('card_no')
         date = request.POST.get('date')
+        payer = request.POST.get('payer')
 
         if MainPayed.objects.filter(order_id=order_id, payment_id=pid, amount=amount, status=1).count() == 1:
 
@@ -254,9 +251,11 @@ def payment_return(request):
             payment.card_number = card
             payment.idpay_track_id = pidtrack
             payment.save()
+            user=payment.user
 
             if str(status) == '10':
                 result = idpay_payment.verify(pid, payment.order_id)
+                print(result)
 
                 if 'status' in result:
 
@@ -264,19 +263,11 @@ def payment_return(request):
                     payment.bank_track_id = result['payment']['track_id']
                     payment.save()
                     # if status is 100 then payment is success
-                    Payments.objects.filter(is_done=False).update(is_done=True)
-                    if amount == 100 :
-                        user = request.user
-                        user.day_left=user.day_left+30
-                        user.save()
-                    elif amount ==200:
-                        user = request.user
-                        user.day_left = user.day_left+60
-                        user.save()
-                    elif amount== 1000:
-                        user = request.user
-                        user.day_left=user.day_left+365
-                        user.save()
+                    Payments.objects.filter(is_done=False,user=user).update(is_done=True)
+                    rooz=(int(amount)/100) *30
+                    user.days_left=user.days_left + rooz
+                    user.save()
+
 
 
                     return render(request, 'accounts/error.html', {'txt': result['message']})

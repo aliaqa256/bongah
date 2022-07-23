@@ -23,7 +23,7 @@ def main_bongah_task():
         for user in users:
             user_searchwords = user.search_words.all()
             for word in user_searchwords:
-                  if home['title'] in word.word or home['address'] in word.word:
+                  if  word.word in home['title'] or word.word  in home['address'] :
                         send_homes(
                         int(user.username), f" {home['title']} \n #{home['address']} \n \
                         {home['description']} \n{home['price']} \n {home['year']}\n  {home['rooms']} \n  \
