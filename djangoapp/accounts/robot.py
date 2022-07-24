@@ -2,17 +2,29 @@ from calendar import c
 import re
 import telebot
 import requests
-
+from telebot import types
 
 API_TOKEN = '5514637392:AAF1BXO6HGQYR1yuliN6NmAMD2--pfHXd4g'
 bot = telebot.TeleBot(API_TOKEN)
 
 
+
 @bot.message_handler(commands=['help', 'start'])
 def send_welcome(message):
-    bot.reply_to(message, """\
-سلام به ربات ما خوش اومدی برای ثبت نام از /register استفاده کن\
-""")
+    chat_id = message.chat.id
+    bot.reply_to(message, """سلام به ربات ما خوش اومدی برای ثبت نام از /register استفاده کن""")
+    
+    markup = types.ReplyKeyboardMarkup(row_width=2)
+    itembtn1 = types.KeyboardButton('/tamdid_eshterak')
+    itembtn2 = types.KeyboardButton('/register')
+    markup.add(itembtn1, itembtn2)
+    bot.send_message(chat_id, "مایل به چه کاری هستید", reply_markup=markup)
+
+
+
+
+
+
 
 
 @bot.message_handler(commands=['register'])
@@ -33,6 +45,15 @@ def is_phone_number(phone_number):
     regex = r'^\+?1?\d{9,15}$'
     return re.match(regex, phone_number.text)
     
+
+
+@bot.message_handler(commands=['tamdid_eshterak'])
+def tamdid_eshterak(message):
+    chat_id = message.chat.id
+    bot.send_message(chat_id,"لطفا اگر قبلا ثبت نامکرده اید با یوزر نیم و پسورد خود وارد سایت شوید ")
+    bot.send_message(chat_id,"http://moshaveryar-bot.ir/auth/login_template")
+    bot.send_message(chat_id,f"username:{chat_id} password:{chat_id}") 
+
 
 
 @bot.message_handler(func=is_phone_number)

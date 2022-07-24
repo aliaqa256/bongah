@@ -189,7 +189,7 @@ def payment_init():
     api_key = 'b93732b3-9473-40ad-a275-933d90fe0532'
     sandbox = "true"
 
-    return IDPayAPI(api_key, base_url, True)
+    return IDPayAPI(api_key, base_url, False)
 
 
 def payment_start(request):
