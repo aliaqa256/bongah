@@ -30,12 +30,12 @@ f"""
 {home['title']}
 {home['description']}
 {home['price']}  
-address: {home['address']}
-sale sakht :  {home['year']} 
-otagh:   {home['rooms']}    
-tabaqe: {home['floor']}   
-parking : {home['parking']} 
-asansor: {home['elevator']}  
+address: #{home['address']}
+sale sakht :  #{home['year']} 
+otagh:   #{home['rooms']}    
+tabaqe: #{home['floor']}   
+parking : #{home['parking']} 
+asansor: #{home['elevator']}  
 qeymat har metr: {home['price_per_meter']}  
 qyemat kol: {home['total_price']} 
 shomare tamas:{home['contact']}   

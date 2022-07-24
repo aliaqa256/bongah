@@ -48,7 +48,7 @@ class User(AbstractBaseUser):
         verbose_name='created date', auto_now_add=True)
     update_date = models.DateTimeField(
         verbose_name='update date', auto_now=True)
-    days_left=models.IntegerField(verbose_name='days_left',blank=True, null=True)
+    days_left=models.IntegerField(verbose_name='days_left',blank=True, null=True,default=0)
 
     # phone number with validation
     phone_number = models.CharField(
