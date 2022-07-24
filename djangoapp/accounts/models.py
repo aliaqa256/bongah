@@ -171,6 +171,7 @@ class Payments(models.Model):
     user = models.ForeignKey('User', on_delete=models.CASCADE,
                              null=True, blank=True, related_name='payments')
     amount = models.IntegerField(default=0)
+    days=models.IntegerField(default=0)
     is_done = models.BooleanField(default=False)
     created_date = models.DateTimeField(
         verbose_name='created date', auto_now_add=True)

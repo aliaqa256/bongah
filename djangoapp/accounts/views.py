@@ -178,7 +178,8 @@ class SelectPlanTemplateView(View):
     def post(self, request, *args, **kwargs):
         user = request.user
         price = request.POST['plan_type']
-        Payments.objects.create(user=user, amount=price)
+        days= request.POST['plan_days']
+        Payments.objects.create(user=user, amount=price,days=int(days))
         return redirect('accounts:card')
 
 
@@ -263,12 +264,14 @@ def payment_return(request):
                     payment.bank_track_id = result['payment']['track_id']
                     payment.save()
                     # if status is 100 then payment is success
-                    Payments.objects.filter(is_done=False,user=user).update(is_done=True)
-                    rooz=(int(amount)/100) *30
+                    rooz=0
+                    pp=Payments.objects.filter(is_done=False,user=user)
+                    for pay in pp:
+                        rooz+= pay.days
+                        pay.is_done=True
+                        pay.save()
                     user.days_left=user.days_left + rooz
                     user.save()
-
-
 
                     return render(request, 'accounts/error.html', {'txt': result['message']})
 

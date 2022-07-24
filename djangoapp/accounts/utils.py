@@ -190,3 +190,90 @@ def divar_scraper():
         print('home is added')
         
     return array_of_homes
+
+
+
+
+def return_telegram_doc(home):
+    title=home['title'] + '\n'
+
+    description=home['description']+ '\n'
+    
+    price=home['price']+ '\n'
+    
+    address=home['address'] 
+    if address is not '':
+        address="🏡"+'adress: ' +  '#'+address.replace(' ','_')+ '\n'
+    
+    link= "link divar: " + home['link'] 
+    
+    year=home['year']
+    if year is not '':
+        year="sal sakht: " +year+ '\n'
+    
+    rooms=home['rooms']
+    if rooms is not '':
+        rooms="🏠"+"otag: " +rooms.replace(' ','_')+ '\n'
+    
+    area=home['area']
+    if area is not '':
+        area="📐"+"masahat: " +area+ '\n'
+
+    floor=home['floor']
+    if floor is not '':
+        floor="tabaqe: " + '#'+floor.replace(' ','_')+ '\n'
+
+    anbari=home['anbari']
+    if anbari is not '':
+        anbari="anbari: " + '#'+anbari.replace(' ','_')+ '\n'
+
+    parking=home['parking']
+    if parking is not '':
+        parking="🅿"+ "parking: " + '#'+parking.replace(' ','_')+ '\n'
+
+    elevator=home['elevator']
+    if elevator is not '':
+        elevator="asansor: " + '#'+elevator.replace(' ','_')+ '\n'
+
+
+    price_per_meter=home['price_per_meter']
+    if price_per_meter is not '':
+        price_per_meter="qeymat har metr: " + price_per_meter+ '\n'
+    
+
+    total_price=home['total_price']
+    if total_price is not '':
+        total_price="💲"+"qeymat kol: " +total_price+ '\n'
+    
+    
+    type_of_sell=home['type_of_sell']
+    if type_of_sell is not '':
+        type_of_sell= '#'+type_of_sell.replace(' ','_')+ '\n'
+
+    main_type=home['main_type']
+    if main_type is not '':
+        main_type= '#'+main_type.replace(' ','_')+ '\n'
+
+    sub_type=home['sub_type']
+    if sub_type is not '':
+        sub_type= '#'+sub_type.replace(' ','_')+ '\n'
+
+    contact=home['contact']
+    if contact is not '':
+        contact= "📞" +'shomare tamsa: '+contact.replace(' ','_')+ '\n'
+
+    return f"""
+{title}{description}{price}{address}{year}{rooms}{area}{floor}{parking}{anbari}{elevator}{price_per_meter}{total_price}{type_of_sell}{main_type}{sub_type}{contact}{link}
+
+    """
+
+
+
+
+
+
+
+
+
+
+

@@ -1,6 +1,6 @@
 from celery import shared_task
 
-from .utils import divar_scraper
+from .utils import divar_scraper,return_telegram_doc
 
 from .models import Home, User
 from .robot import send_homes
@@ -25,30 +25,9 @@ def main_bongah_task():
             for word in user_searchwords:
                   if  word.word in home['title'] or word.word  in home['address'] :
                         send_homes(
-                        int(user.username), 
-f"""
-{home['title']}
-{home['description']}
-{home['price']}  
-address: #{home['address']}
-sale sakht :  #{home['year']} 
-otagh:   #{home['rooms']}    
-tabaqe: #{home['floor']}   
-parking : #{home['parking']} 
-asansor: #{home['elevator']}  
-qeymat har metr: {home['price_per_meter']}  
-qyemat kol: {home['total_price']} 
-shomare tamas:{home['contact']}   
-#{home['type_of_sell']}
-#{home['main_type']}
-#{home['sub_type']} 
-link divar :{home['link']}
-"""
+                        int(user.username),return_telegram_doc(home))
 
-
-                               )
-
-        return 'done'
+    return 'done'
 
 
 @shared_task
