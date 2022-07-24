@@ -16,7 +16,7 @@ function getCookie(name) {
 
 async function deleteKeyword(keyword_id) {
 	try {
-		res = await fetch("http://127.0.0.1:8000/auth/delete_word/", {
+		res = await fetch("https://moshaveryar-bot.ir/auth/delete_word/", {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json",
