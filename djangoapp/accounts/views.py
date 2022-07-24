@@ -86,7 +86,7 @@ class FinalRegisterTemplateView(View):
     def post(self, request, *args, **kwargs):
         user=request.user
         keyword = request.POST['keyword']
-        list_of_keywords = keyword.split(',')
+        list_of_keywords = keyword.split('-')
 
         SearchWords.objects.bulk_create(
             SearchWords(word=keyword, user=user) for keyword in list_of_keywords
