@@ -79,6 +79,9 @@ class SetUserPhoneNumberAPIView(APIView):
 
 class FinalRegisterTemplateView(View):
     def get(self, request,*args, **kwargs):
+        if not request.user.is_authenticated:
+            return redirect('/auth/login_template/')
+
         context={
             'title':'ثبت نام نهایی',
         }
@@ -106,6 +109,7 @@ class LoginTemplateView(View):
         # if user is login
         if request.user.is_authenticated:
             return redirect('accounts:card')
+
         form = LoginForm()
         context={
             'title':'ورود',
@@ -143,6 +147,8 @@ class LoginTemplateView(View):
 
 class CardTemplateView(View):
     def get(self, request, *args, **kwargs):
+        if not request.user.is_authenticated:
+            return redirect('/auth/login_template/')
         user=request.user
         keywords = user.search_words.all()
         # sum of user payments amount
@@ -171,6 +177,8 @@ class DeleteKeywordAPIView(APIView):
 
 class SelectPlanTemplateView(View):
     def get(self, request, *args, **kwargs):
+        if not request.user.is_authenticated:
+            return redirect('/auth/login_template/')
         context = {
             'title': 'انتخاب پلن',
         }

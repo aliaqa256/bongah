@@ -1,12 +1,8 @@
 {% load static %}
 <nav class="navbar navbar-expand-lg base-header-nav  nav-bar">
-  <a class="navbar-brand" href="#">
 
-<img src="{% static 'images/nezamlogo.png' %}"  class="logo-base-header" alt="">
-
-  </a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
+    <span class="navbar-toggler-icon"> <i class="fa fa-bars bars"> </i>   </span>
   </button>
 
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -20,7 +16,7 @@
 
       {% if  user.is_authenticated %}
               <a class="nav-link " href="{% url 'accounts:card' %}"  id="navbarDropdown" role="button"  aria-haspopup="true" aria-expanded="false">
-                سبد
+                سبد خرید
 
               </a>
 
@@ -42,7 +38,7 @@
 
       {% if  user.is_authenticated %}
               <a class="nav-link " href="{% url 'accounts:final_register' %}"  id="navbarDropdown" role="button"  aria-haspopup="true" aria-expanded="false">
-               کلمات کلیدی 
+               انتخاب محله
 
               </a>
 
@@ -87,10 +83,6 @@
 
 
     </ul>
-    <!-- <form class="form-inline my-2 my-lg-0">
-      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-      
-    </form> -->
+
   </div>
 </nav>

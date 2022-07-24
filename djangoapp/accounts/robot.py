@@ -15,9 +15,10 @@ def send_welcome(message):
     bot.reply_to(message, """سلام به ربات ما خوش اومدی برای ثبت نام از /register استفاده کن""")
     
     markup = types.ReplyKeyboardMarkup(row_width=2)
-    itembtn1 = types.KeyboardButton('/tamdid_eshterak')
+    itembtn1 = types.KeyboardButton('/تمدید_اشتراک')
     itembtn2 = types.KeyboardButton('/register')
-    markup.add(itembtn1, itembtn2)
+    itembtn3 = types.KeyboardButton('/پشتیبانی')
+    markup.add(itembtn1, itembtn2,itembtn3)
     bot.send_message(chat_id, "مایل به چه کاری هستید", reply_markup=markup)
 
 
@@ -47,12 +48,20 @@ def is_phone_number(phone_number):
     
 
 
-@bot.message_handler(commands=['tamdid_eshterak'])
+@bot.message_handler(commands=['تمدید_اشتراک'])
 def tamdid_eshterak(message):
     chat_id = message.chat.id
     bot.send_message(chat_id,"لطفا اگر قبلا ثبت نامکرده اید با یوزر نیم و پسورد خود وارد سایت شوید ")
     bot.send_message(chat_id,"http://moshaveryar-bot.ir/auth/login_template")
     bot.send_message(chat_id,f"username:{chat_id} password:{chat_id}") 
+
+
+@bot.message_handler(commands=['پشتیبانی'])
+def tamdid_eshterak(message):
+    chat_id = message.chat.id
+    bot.send_message(chat_id,"لطفا به تلگرام زیر پیام دهید ")
+    bot.send_message(chat_id,"@moshaveryar_poshtibani " )
+
 
 
 
