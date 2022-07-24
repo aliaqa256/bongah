@@ -83,7 +83,7 @@ class FinalRegisterTemplateView(View):
             return redirect('/auth/login_template/')
 
         context={
-            'title':'ثبت نام نهایی',
+            'title':'انتخاب محل',
         }
         return render(request, 'accounts/final_register.html',context)
     def post(self, request, *args, **kwargs):
@@ -98,7 +98,7 @@ class FinalRegisterTemplateView(View):
 
 
 
-        return redirect('/auth/select_plan')
+        return redirect('/auth/card')
         # return render(request, 'accounts/final_register.html',{'title':'ثبت نام نهایی'})
         
 
