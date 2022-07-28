@@ -34,6 +34,10 @@
  قابل پرداخت :{{sum_of_payments}}
 
 </div>
+<div class="pardakht">
+تعداد روز باقی مانده از اشتراک شما:{{days_left}}
+
+</div>
 
 <br>
 
@@ -52,6 +56,19 @@
 
 
 </form>
+<br>
+<br>
+
+<form method="post" action="{% url 'accounts:empty_card' %}" >
+
+    {% csrf_token %}
+
+  <button class="pay-btn " type="submit">  خالی کردن سبد خرید </button>
+
+
+
+</form>
+
 
   
 </div>

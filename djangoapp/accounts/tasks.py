@@ -23,7 +23,7 @@ def main_bongah_task():
         for user in users:
             user_searchwords = user.search_words.all()
             for word in user_searchwords:
-                  if  word.word in home['title'] or word.word  in home['address'] :
+                  if  word.word  in home['address'] :
                         send_homes(
                         int(user.username),return_telegram_doc(home))
 
@@ -44,7 +44,11 @@ def home_deleter():
 
 @shared_task
 def reduceUserDaysLeft():
-    users = User.objects.filter(days_left__gt=0)
+    users = User.objects.all()
     for user in users:
-        user.days_left = user.days_left - 1
-        user.save()
+        if user.days_left > 0:
+            user.days_left = user.days_left - 1
+            user.save()
+        else:
+            send_homes(int(user.username),"""  مشتری گرامی اشتراک شما به پایان رسیده لطفا وارد سایت شوید و اشتراک خود را تمدید کنید """)
+

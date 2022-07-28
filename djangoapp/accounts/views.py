@@ -153,10 +153,12 @@ class CardTemplateView(View):
         keywords = user.search_words.all()
         # sum of user payments amount
         sum_of_payments = Payments.objects.filter(user=user, is_done=False).aggregate(Sum('amount'))['amount__sum'] or 0
+        days_left = user.days_left
         context={
             'title':'خرید کارت',
             'keywords': keywords,
-            'sum_of_payments':sum_of_payments
+            'sum_of_payments':sum_of_payments,
+            'days_left':days_left
         }
         return render(request, 'accounts/card.html',context)
 
@@ -280,8 +282,9 @@ def payment_return(request):
                         pay.save()
                     user.days_left=user.days_left + rooz
                     user.save()
+                    result['message'] = '  پرداخت شما با موفقیت انجام شد از این پس اگهی های محله هایی که انتخاب کردید به تلگرامتان ارسال خواهد شد'  
 
-                    return render(request, 'accounts/error.html', {'txt': result['message']})
+                    return render(request, 'accounts/error.html', {'txt':result['message'] })
 
                 else:
                     txt = result['message']
@@ -317,3 +320,18 @@ def payment_check(request, pk):
         payment.save()
 
     return render(request, 'accounts/error.html', {'txt': result['message']})
+
+
+class EmptyCardView(View):
+    def post(self, request, *args, **kwargs):
+        if not request.user.is_authenticated:
+            return redirect('/auth/login_template/')
+
+        user = request.user
+        payments=Payments.objects.filter(user=user)
+        for pay in payments:
+            pay.delete()
+
+        
+
+        return redirect('accounts:card')

@@ -16,6 +16,7 @@ urlpatterns = [
     path('login_template/', views.LoginTemplateView.as_view(), name='login'),
     path('card/', views.CardTemplateView.as_view(), name='card'),
     path('select_plan/', views.SelectPlanTemplateView.as_view(), name="select_plan"),
+    path('empty_card/', views.EmptyCardView.as_view(), name="empty_card"),
 
     # //
     path('payment', views.payment_start, name='payment_start'),

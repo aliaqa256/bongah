@@ -265,6 +265,7 @@ def return_telegram_doc(home):
     return f"""
 {title}{description}{price}{address}{year}{rooms}{area}{floor}{parking}{anbari}{elevator}{price_per_meter}{total_price}{type_of_sell}{main_type}{sub_type}{contact}{link}
 
+@moshaveryarbot
     """
 
 
