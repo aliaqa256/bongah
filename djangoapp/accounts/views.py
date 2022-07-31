@@ -155,7 +155,7 @@ class CardTemplateView(View):
         sum_of_payments = Payments.objects.filter(user=user, is_done=False).aggregate(Sum('amount'))['amount__sum'] or 0
         days_left = user.days_left
         context={
-            'title':'خرید کارت',
+            'title':'سبد خرید',
             'keywords': keywords,
             'sum_of_payments':sum_of_payments,
             'days_left':days_left

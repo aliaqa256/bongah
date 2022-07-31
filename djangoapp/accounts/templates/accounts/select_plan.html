@@ -12,22 +12,22 @@
 <!-- aaaaaaaaaaaaaaaaaaaaaa -->
 <div class="container mb-5 mt-5">
             <div class="pricing card-deck flex-column flex-md-row mb-3">
-                <div class="card card-pricing text-center px-3 mb-4">
+                <div class="card card-pricing text-center px-3 mb-4 bg-dark">
                     <span class="h6 w-60 mx-auto px-4 py-1 rounded-bottom bg-primary text-white shadow-sm">Starter</span>
                     <div class="bg-transparent card-header pt-4 border-0">
                         <h1 class="h1 font-weight-normal text-primary text-center mb-0" data-pricing-value="15">تومان<span class="price">129</span><span class="h6 text-muted ml-2">/ </span></h1>
                     </div>
                     <div class="card-body pt-0">
                         <ul class="list-unstyled mb-4">
-                            <li>یک ماه اشتراک</li>
+                            <li class=" text-white">یک ماه اشتراک</li>
 
                         </ul>
                                                                         <form method="post">  
                                    {% csrf_token %}
            <input type="hidden" name="plan_type" value="1290000">
            <input type="hidden" name="plan_days" value="31">
-
-                        <button type="submit" class="btn btn-outline-secondary mb-3 hvr">اضافه کردن به سبد</button>
+                                                                            <br/>
+                        <button type="submit" class="btn btn-outline-secondary mb-3 hvr btn-success ">اضافه کردن به سبد</button>
                         </form>
                     </div>
                 </div>
@@ -37,64 +37,65 @@
 <!--  -->
 
 
-                <div class="card card-pricing popular shadow text-center px-3 mb-4">
+                <div class="card card-pricing text-center px-3 mb-4 bg-dark ">
                     <span class="h6 w-60 mx-auto px-4 py-1 rounded-bottom bg-primary text-white shadow-sm">Professional</span>
                     <div class="bg-transparent card-header pt-4 border-0">
                         <h1 class="h1 font-weight-normal text-primary text-center mb-0" data-pricing-value="30">تومان<span class="price">258</span><span class="h6 text-muted ml-2">/ </span></h1>
                     </div>
-                    <div class="card-body pt-0">
+                    <div class="card-body pt-0 ">
                         <ul class="list-unstyled mb-4">
-                            <li> دو ماه اشتراک</li>
+                            <li class=" text-white"> دو ماه اشتراک</li>
 
                         </ul>
                                                 <form method="post">  
                                    {% csrf_token %}
            <input type="hidden" name="plan_type" value="2580000">
                       <input type="hidden" name="plan_days" value="62">
-                        <button type="submit" class="btn btn-outline-secondary mb-3 hvr">اضافه کردن به سبد</button>
+                      <br/>
+                        <button type="submit" class="btn btn-outline-secondary mb-3 hvr btn-success">اضافه کردن به سبد</button>
                         </form>
                     </div>
                 </div>
 
                 <!--  -->
-                <div class="card card-pricing text-center px-3 mb-4">
+                <div class="card card-pricing text-center px-3 mb-4 bg-dark">
                     <span class="h6 w-60 mx-auto px-4 py-1 rounded-bottom bg-primary text-white shadow-sm">Business</span>
                     <div class="bg-transparent card-header pt-4 border-0">
                         <h1 class="h1 font-weight-normal text-primary text-center mb-0" data-pricing-value="45">تومان<span class="price">328</span><span class="h6 text-muted ml-2">/ </span></h1>
                     </div>
                     <div class="card-body pt-0">
                         <ul class="list-unstyled mb-4">
-                            <li> سه ماه اشتراک</li>
-                            <li> 15 درصد تخفیف</li>
+                            <li class=" text-white"> سه ماه اشتراک</li>
+                            <li class=" text-white"> 15 درصد تخفیف</li>
 
                         </ul>
                         <form method="post">
                                    {% csrf_token %}
            <input type="hidden" name="plan_type" value="32800000">
                       <input type="hidden" name="plan_days" value="93">
-                        <button type="submit" class="btn btn-outline-secondary mb-3 hvr">اضافه کردن به سبد</button>
+                        <button type="submit" class="btn btn-outline-secondary mb-3 hvr btn-success  ">اضافه کردن به سبد</button>
                         </form>
                     </div>
                 </div>
 
                 
 <!--  -->
-                 <div class="card card-pricing text-center px-3 mb-4">
+                 <div class="card card-pricing text-center px-3 mb-4 bg-dark">
                     <span class="h6 w-60 mx-auto px-4 py-1 rounded-bottom bg-primary text-white shadow-sm">Business</span>
                     <div class="bg-transparent card-header pt-4 border-0">
                         <h1 class="h1 font-weight-normal text-primary text-center mb-0" data-pricing-value="45"> تومان<span class="price">619</span><span class="h6 text-muted ml-2">/ </span></h1>
                     </div>
                     <div class="card-body pt-0">
                         <ul class="list-unstyled mb-4">
-                            <li>شش ماه اشتراک</li>
-                            <li> 20 درصد تخفیف</li>
+                            <li class=" text-white">شش ماه اشتراک</li>
+                            <li class=" text-white"> 20 درصد تخفیف</li>
 
                         </ul>
                         <form method="post">
                                    {% csrf_token %}
            <input type="hidden" name="plan_type" value="61900000">
                       <input type="hidden" name="plan_days" value="182">
-                        <button type="submit" class="btn btn-outline-secondary mb-3 hvr">اضافه کردن به سبد</button>
+                        <button type="submit" class="btn btn-outline-secondary mb-3 hvr btn-success">اضافه کردن به سبد</button>
                         </form>
                     </div>
                 </div>
@@ -102,22 +103,22 @@
 
 
 
-                 <div class="card card-pricing text-center px-3 mb-4">
+                 <div class="card card-pricing text-center px-3 mb-4 bg-dark  ">
                     <span class="h6 w-60 mx-auto px-4 py-1 rounded-bottom bg-primary text-white shadow-sm">Business</span>
                     <div class="bg-transparent card-header pt-4 border-0">
                         <h1 class="h1 font-weight-normal text-primary text-center mb-0" data-pricing-value="45">تومان<span class="price">1083</span><span class="h6 text-muted ml-2">/ </span></h1>
                     </div>
                     <div class="card-body pt-0">
                         <ul class="list-unstyled mb-4">
-                            <li>یک سال اشتراک</li>
-                            <li> 30 درصد تخفیف</li>
+                            <li class=" text-white">یک سال اشتراک</li>
+                            <li class=" text-white"> 30 درصد تخفیف</li>
 
                         </ul>
                         <form method="post">
                                    {% csrf_token %}
            <input type="hidden" name="plan_type" value="10830000">
                       <input type="hidden" name="plan_days" value="365">
-                        <button type="submit" class="btn btn-outline-secondary mb-3 hvr">اضافه کردن به سبد</button>
+                        <button type="submit" class="btn btn-outline-secondary mb-3 hvr btn-success">اضافه کردن به سبد</button>
                         </form>
                     </div>
                 </div>
