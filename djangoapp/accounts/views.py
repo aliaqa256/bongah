@@ -208,6 +208,11 @@ def payment_start(request):
         order_id = uuid.uuid1()
         amount = request.POST.get('amount')
         user=User.objects.get(username=request.POST.get('name'))
+        if amount=='0':
+            return redirect('/auth/select_plan/')
+
+
+
 
         payer = {
             'name': request.POST.get('name'),
